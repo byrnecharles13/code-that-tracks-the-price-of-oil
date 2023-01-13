@@ -1,0 +1,14 @@
+const axios = require("axios");
+
+async function getOilPrice() {
+  try {
+    const response = await axios.get("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=OIL&apikey=YOUR_API_KEY");
+    const data = response.data["Time Series (Daily)"];
+    const latestPrice = data[Object.keys(data)[0]]["4. close"];
+    console.log(`The current price of oil is $${latestPrice}`);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+getOilPrice();
